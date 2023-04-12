@@ -3,5 +3,11 @@
 {% block title %}TheDistrict - Catégories{% endblock %}
 
 {% block body %}
-    <h1>Categories</h1>
+    <div class="container">
+        {% for categorie in categories %}
+            <div>
+                <p>{{ categorie.libelle }}</p>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
