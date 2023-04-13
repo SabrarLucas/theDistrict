@@ -13,8 +13,9 @@ class Commande
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $id_plat = null;
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Plat $plat = null;
 
     #[ORM\Column]
     private ?int $quantite = null;
@@ -45,14 +46,14 @@ class Commande
         return $this->id;
     }
 
-    public function getIdPlat(): ?int
+    public function getPlat(): ?Plat
     {
-        return $this->id_plat;
+        return $this->plat;
     }
 
-    public function setIdPlat(int $id_plat): self
+    public function setPlat(?Plat $plat): self
     {
-        $this->id_plat = $id_plat;
+        $this->plat = $plat;
 
         return $this;
     }

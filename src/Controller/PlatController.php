@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\PlatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,10 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlatController extends AbstractController
 {
     #[Route('/plat', name: 'plat')]
-    public function index(): Response
+    public function index(PlatRepository $platRepository): Response
     {
         return $this->render('pages/plat/index.html.twig', [
-            'controller_name' => 'PlatController',
+            'plats' => $platRepository->findAll()
         ]);
     }
 }

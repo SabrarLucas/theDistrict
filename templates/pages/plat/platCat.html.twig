@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
-{% block title %}The District - Plats par catégories{% endblock %}
+{% block title %}The District - Plat par catégories{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
@@ -8,7 +8,7 @@
             <div class="card border-primary mb-3" style="max-width: 20rem;">
                 <div class="card-header">{{ plat.libelle }}</div>
                 <div class="card-body">
-                    <img src="{{ asset('images_the_district/food/') ~ plat.image }}" alt="{{ plat.image }}"  width="100%">
+                    <img src="{{ asset('images_the_district/category/') ~ plat.image }}" alt="{{ plat.image }}"  width="100%">
                 </div>
             </div>
         {% endfor %}
