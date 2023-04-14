@@ -15,14 +15,14 @@ class Categorie
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $libelle = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 5)]
-    private ?string $active = null;
+    #[ORM\Column]
+    private ?bool $active = null;
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Plat::class)]
     private Collection $plats;
@@ -61,12 +61,12 @@ class Categorie
         return $this;
     }
 
-    public function getActive(): ?string
+    public function isActive(): ?bool
     {
         return $this->active;
     }
 
-    public function setActive(string $active): self
+    public function setActive(bool $active): self
     {
         $this->active = $active;
 

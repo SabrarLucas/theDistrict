@@ -16,31 +16,31 @@ class Plat
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $libelle = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private ?float $prix = null;
+    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
+    private ?string $prix = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $image = null;
+
+    #[ORM\Column]
+    private ?bool $active = null;
 
     #[ORM\ManyToOne(inversedBy: 'plats')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
 
-    #[ORM\Column(length: 5)]
-    private ?string $active = null;
-
-    #[ORM\OneToMany(mappedBy: 'plat', targetEntity: Commande::class)]
-    private Collection $commandes;
+    #[ORM\OneToMany(mappedBy: 'plat', targetEntity: Detail::class)]
+    private Collection $details;
 
     public function __construct()
     {
-        $this->commandes = new ArrayCollection();
+        $this->details = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -72,12 +72,12 @@ class Plat
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getPrix(): ?string
     {
         return $this->prix;
     }
 
-    public function setPrix(float $prix): self
+    public function setPrix(string $prix): self
     {
         $this->prix = $prix;
 
@@ -96,6 +96,18 @@ class Plat
         return $this;
     }
 
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
     public function getCategorie(): ?Categorie
     {
         return $this->categorie;
@@ -108,42 +120,30 @@ class Plat
         return $this;
     }
 
-    public function getActive(): ?string
-    {
-        return $this->active;
-    }
-
-    public function setActive(string $active): self
-    {
-        $this->active = $active;
-
-        return $this;
-    }
-
     /**
-     * @return Collection<int, Commande>
+     * @return Collection<int, Detail>
      */
-    public function getCommandes(): Collection
+    public function getDetails(): Collection
     {
-        return $this->commandes;
+        return $this->details;
     }
 
-    public function addCommande(Commande $commande): self
+    public function addDetail(Detail $detail): self
     {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes->add($commande);
-            $commande->setPlat($this);
+        if (!$this->details->contains($detail)) {
+            $this->details->add($detail);
+            $detail->setPlat($this);
         }
 
         return $this;
     }
 
-    public function removeCommande(Commande $commande): self
+    public function removeDetail(Detail $detail): self
     {
-        if ($this->commandes->removeElement($commande)) {
+        if ($this->details->removeElement($detail)) {
             // set the owning side to null (unless already changed)
-            if ($commande->getPlat() === $this) {
-                $commande->setPlat(null);
+            if ($detail->getPlat() === $this) {
+                $detail->setPlat(null);
             }
         }
 

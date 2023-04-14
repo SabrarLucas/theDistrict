@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
@@ -13,143 +16,106 @@ class Commande
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date_commande = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
+    private ?string $total = null;
+
+    #[ORM\Column]
+    private ?int $etat = null;
+
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Plat $plat = null;
+    private ?Utilisateur $utilisateur = null;
 
-    #[ORM\Column]
-    private ?int $quantite = null;
+    #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Detail::class)]
+    private Collection $details;
 
-    #[ORM\Column]
-    private ?float $total = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $date_commande = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $etat = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $nom_client = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $telephone_client = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $email_client = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $adresse_client = null;
+    public function __construct()
+    {
+        $this->details = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPlat(): ?Plat
-    {
-        return $this->plat;
-    }
-
-    public function setPlat(?Plat $plat): self
-    {
-        $this->plat = $plat;
-
-        return $this;
-    }
-
-    public function getQuantite(): ?int
-    {
-        return $this->quantite;
-    }
-
-    public function setQuantite(int $quantite): self
-    {
-        $this->quantite = $quantite;
-
-        return $this;
-    }
-
-    public function getTotal(): ?float
-    {
-        return $this->total;
-    }
-
-    public function setTotal(float $total): self
-    {
-        $this->total = $total;
-
-        return $this;
-    }
-
-    public function getDateCommande(): ?\DateTimeImmutable
+    public function getDateCommande(): ?\DateTimeInterface
     {
         return $this->date_commande;
     }
 
-    public function setDateCommande(\DateTimeImmutable $date_commande): self
+    public function setDateCommande(\DateTimeInterface $date_commande): self
     {
         $this->date_commande = $date_commande;
 
         return $this;
     }
 
-    public function getEtat(): ?string
+    public function getTotal(): ?string
+    {
+        return $this->total;
+    }
+
+    public function setTotal(string $total): self
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    public function getEtat(): ?int
     {
         return $this->etat;
     }
 
-    public function setEtat(string $etat): self
+    public function setEtat(int $etat): self
     {
         $this->etat = $etat;
 
         return $this;
     }
 
-    public function getNomClient(): ?string
+    public function getUtilisateur(): ?Utilisateur
     {
-        return $this->nom_client;
+        return $this->utilisateur;
     }
 
-    public function setNomClient(string $nom_client): self
+    public function setUtilisateur(?Utilisateur $utilisateur): self
     {
-        $this->nom_client = $nom_client;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
-    public function getTelephoneClient(): ?string
+    /**
+     * @return Collection<int, Detail>
+     */
+    public function getDetails(): Collection
     {
-        return $this->telephone_client;
+        return $this->details;
     }
 
-    public function setTelephoneClient(string $telephone_client): self
+    public function addDetail(Detail $detail): self
     {
-        $this->telephone_client = $telephone_client;
+        if (!$this->details->contains($detail)) {
+            $this->details->add($detail);
+            $detail->setCommande($this);
+        }
 
         return $this;
     }
 
-    public function getEmailClient(): ?string
+    public function removeDetail(Detail $detail): self
     {
-        return $this->email_client;
-    }
-
-    public function setEmailClient(string $email_client): self
-    {
-        $this->email_client = $email_client;
-
-        return $this;
-    }
-
-    public function getAdresseClient(): ?string
-    {
-        return $this->adresse_client;
-    }
-
-    public function setAdresseClient(string $adresse_client): self
-    {
-        $this->adresse_client = $adresse_client;
+        if ($this->details->removeElement($detail)) {
+            // set the owning side to null (unless already changed)
+            if ($detail->getCommande() === $this) {
+                $detail->setCommande(null);
+            }
+        }
 
         return $this;
     }
