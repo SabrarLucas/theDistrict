@@ -23,9 +23,9 @@ class CategorieController extends AbstractController
     {
         $categorie = $categorieRepository->findBy(["id" => $id]);
 
-
         return $this->render('pages/plat/platCat.html.twig', [
-            'plats' => $platRepository->findAll()
+            'plats' => $platRepository->findAll(),
+            'categorie' => $categorie
         ]);
     }
 }

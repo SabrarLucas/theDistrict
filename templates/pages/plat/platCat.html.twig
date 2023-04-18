@@ -5,12 +5,16 @@
 {% block body %}
     <div class="container mt-4">
         {% for plat in plats %}
-            <div class="card border-primary mb-3" style="max-width: 20rem;">
-                <div class="card-header">{{ plat.libelle }}</div>
-                <div class="card-body">
-                    <img src="{{ asset('images_the_district/category/') ~ plat.image }}" alt="{{ plat.image }}"  width="100%">
+            {% if plat.active != false %}
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">{{ plat.libelle }}</div>
+                    <div class="card-body">
+                        <img src="{{ asset('images_the_district/food/') ~ plat.image }}" alt="{{ plat.image }}"  width="100%">
+                        <p class="card-text mt-3">{{ plat.description }}</p>
+                        <p class="card-text">{{ plat.prix }} €</p>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
