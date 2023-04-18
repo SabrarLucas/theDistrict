@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Categorie;
 use App\Entity\Plat;
+use App\Entity\Utilisateur;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -11,6 +12,8 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        // Categories
+
         $categorie1 = new Categorie();
         $categorie1->setLibelle("Burger");
         $categorie1->setImage("burger_cat.jpg");
@@ -31,6 +34,8 @@ class AppFixtures extends Fixture
         $categorie3->setActive(true);
 
         $manager->persist($categorie3);
+
+        // Plats
 
         $plat1 = new Plat();
         $plat1->setLibelle("Miam Burger");
@@ -81,6 +86,26 @@ class AppFixtures extends Fixture
         $plat5->setCategorie($categorie1);
 
         $manager->persist($plat5);
+
+        // Utilisateurs
+
+        $user1 = new Utilisateur();
+        $user1->setNom('Pinchon');
+        $user1->setPrenom('Lucas');
+        $user1->setEmail('Lucas.pinchon@mail.fr');
+        $user1->setTelephone('06 12 34 56 78');
+        $user1->setPassword('password');
+
+        $manager->persist($user1);
+
+        $user2 = new Utilisateur();
+        $user2->setNom('Pinchon');
+        $user2->setPrenom('Lucas');
+        $user2->setEmail('Lucas.pinchon@mail.fr');
+        $user2->setTelephone('06 12 34 56 78');
+        $user2->setPassword('password');
+
+        $manager->persist($user2);
 
         $manager->flush();
     }
