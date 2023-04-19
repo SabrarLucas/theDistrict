@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Plat;
 use App\Entity\Categorie;
-use App\Repository\PlatRepository;
 use App\Repository\CategorieRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

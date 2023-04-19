@@ -2,8 +2,9 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Categorie;
 use App\Entity\Plat;
+use App\Entity\Commande;
+use App\Entity\Categorie;
 use App\Entity\Utilisateur;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -15,75 +16,75 @@ class AppFixtures extends Fixture
         // Categories
 
         $categorie1 = new Categorie();
-        $categorie1->setLibelle("Burger");
-        $categorie1->setImage("burger_cat.jpg");
-        $categorie1->setActive(true);
+        $categorie1->setLibelle("Burger")
+            ->setImage("burger_cat.jpg")
+            ->setActive(true);
 
         $manager->persist($categorie1);
 
         $categorie2 = new Categorie();
-        $categorie2->setLibelle("Pizza");
-        $categorie2->setImage("pizza_cat.jpg");
-        $categorie2->setActive(true);
+        $categorie2->setLibelle("Pizza")
+            ->setImage("pizza_cat.jpg")
+            ->setActive(true);
 
         $manager->persist($categorie2);
 
         $categorie3 = new Categorie();
-        $categorie3->setLibelle("Sandwich");
-        $categorie3->setImage("sandwich_cat.jpg");
-        $categorie3->setActive(true);
+        $categorie3->setLibelle("Sandwich")
+            ->setImage("sandwich_cat.jpg")
+            ->setActive(true);
 
         $manager->persist($categorie3);
 
         // Plats
 
         $plat1 = new Plat();
-        $plat1->setLibelle("Miam Burger");
-        $plat1->setDescription("Laissez vous emporter par son goût indescriptible.");
-        $plat1->setPrix(12.3);
-        $plat1->setImage("cheesburger.jpg");
-        $plat1->setActive(true);
-        $plat1->setCategorie($categorie1);
+        $plat1->setLibelle("Miam Burger")
+            ->setDescription("Laissez vous emporter par son goût indescriptible.")
+            ->setPrix(12.3)
+            ->setImage("cheesburger.jpg")
+            ->setActive(true)
+            ->setCategorie($categorie1);
 
         $manager->persist($plat1);
 
         $plat2 = new Plat();
-        $plat2->setLibelle("Pizza margherita");
-        $plat2->setDescription("La base des pizza, mais celle la ne vous laisseras pas indifferent");
-        $plat2->setPrix(15.99);
-        $plat2->setImage("pizza-margherita.jpg");
-        $plat2->setActive(true);
-        $plat2->setCategorie($categorie2);
+        $plat2->setLibelle("Pizza margherita")
+            ->setDescription("La base des pizza, mais celle la ne vous laisseras pas indifferent")
+            ->setPrix(15.99)
+            ->setImage("pizza-margherita.jpg")
+            ->setActive(true)
+            ->setCategorie($categorie2);
 
         $manager->persist($plat2);
 
         $plat3 = new Plat();
-        $plat3->setLibelle("Courgettes farcies");
-        $plat3->setDescription("En vrai de vrai heuresement on vend pas ce plat.");
-        $plat3->setPrix(18.76);
-        $plat3->setImage("courgettes_farcies.jpg");
-        $plat3->setActive(false);
-        $plat3->setCategorie($categorie1);
+        $plat3->setLibelle("Courgettes farcies")
+            ->setDescription("En vrai de vrai heuresement on vend pas ce plat.")
+            ->setPrix(18.76)
+            ->setImage("courgettes_farcies.jpg")
+            ->setActive(false)
+            ->setCategorie($categorie1);
 
         $manager->persist($plat3);
 
         $plat4 = new Plat();
-        $plat4->setLibelle("Sandwich fromage");
-        $plat4->setDescription("Du pain du boulanger et un fromage qui vient du petit traiteru du village.");
-        $plat4->setPrix(6.8);
-        $plat4->setImage("Food-Name-3631.jpg");
-        $plat4->setActive(true);
-        $plat4->setCategorie($categorie3);
+        $plat4->setLibelle("Sandwich fromage")
+            ->setDescription("Du pain du boulanger et un fromage qui vient du petit traiteru du village.")
+            ->setPrix(6.8)
+            ->setImage("Food-Name-3631.jpg")
+            ->setActive(true)
+            ->setCategorie($categorie3);
 
         $manager->persist($plat4);
 
         $plat5 = new Plat();
-        $plat5->setLibelle("Hamburger");
-        $plat5->setDescription("Un burger tout ce qu'il y a de plus simple mais bien meilleur que McDo");
-        $plat5->setPrix(10.5);
-        $plat5->setImage("hamburger.jpg");
-        $plat5->setActive(true);
-        $plat5->setCategorie($categorie1);
+        $plat5->setLibelle("Hamburger")
+            ->setDescription("Un burger tout ce qu'il y a de plus simple mais bien meilleur que McDo")
+            ->setPrix(10.5)
+            ->setImage("hamburger.jpg")
+            ->setActive(true)
+            ->setCategorie($categorie1);
 
         $manager->persist($plat5);
 
@@ -108,6 +109,30 @@ class AppFixtures extends Fixture
             ->setPlainPassword('password');
 
         $manager->persist($user2);
+
+        $commande1 = new Commande();
+        $commande1->setDateCommande(new \DateTime)
+            ->setUtilisateur($user1)
+            ->setTotal(12.5)
+            ->setEtat(0);
+
+        $manager->persist($commande1);
+
+        $commande2 = new Commande();
+        $commande2->setDateCommande(new \DateTime)
+            ->setUtilisateur($user1)
+            ->setTotal(20.85)
+            ->setEtat(3);
+
+        $manager->persist($commande2);
+
+        $commande3 = new Commande();
+        $commande3->setDateCommande(new \DateTime)
+            ->setUtilisateur($user2)
+            ->setTotal(16.54)
+            ->setEtat(0);
+
+        $manager->persist($commande3);
 
         $manager->flush();
     }

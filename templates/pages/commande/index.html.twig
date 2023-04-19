@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The District - Mes commandes{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">Mes commandes</h1>
+        {% for plat in utilisateur.commandes %}
+            {{ commande.id }}
+        {% endfor %}
+    </div>
+{% endblock %}
