@@ -90,20 +90,22 @@ class AppFixtures extends Fixture
         // Utilisateurs
 
         $user1 = new Utilisateur();
-        $user1->setNom('Pinchon');
-        $user1->setPrenom('Lucas');
-        $user1->setEmail('Lucas.pinchon@mail.fr');
-        $user1->setTelephone('06 12 34 56 78');
-        $user1->setPassword('password');
+        $user1->setNom('Pinchon')
+            ->setPrenom('Lucas')
+            ->setEmail('Lucas.pinchon@mail.fr')
+            ->setTelephone('06 12 34 56 78')
+            ->setRoles(['ROLE_USER'])
+            ->setPlainPassword('password');
 
         $manager->persist($user1);
 
         $user2 = new Utilisateur();
-        $user2->setNom('Pinchon');
-        $user2->setPrenom('Lucas');
-        $user2->setEmail('Lucas.pinchon@mail.fr');
-        $user2->setTelephone('06 12 34 56 78');
-        $user2->setPassword('password');
+        $user2->setNom('Philipe')
+            ->setPrenom('Jean')
+            ->setEmail('jean.philipe@mail.fr')
+            ->setTelephone('06 87 65 43 21')
+            ->setRoles(['ROLE_USER'])
+            ->setPlainPassword('password');
 
         $manager->persist($user2);
 

@@ -4,9 +4,10 @@
 
 {% block body %}
     <div class="container mt-4">
-        {% for plat in plats %}
+        <h1>Les {{ categorie.libelle }}</h1>
+        {% for plat in categorie.plats %}
             {% if (plat.active != false) %}
-                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card border-primary mb-3 mt-4" style="max-width: 20rem;">
                     <div class="card-header">{{ plat.libelle }}</div>
                     <div class="card-body">
                         <img src="{{ asset('images_the_district/food/') ~ plat.image }}" alt="{{ plat.image }}"  width="100%">

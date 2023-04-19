@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Plat;
-use App\Repository\CategorieRepository;
+use App\Entity\Categorie;
 use App\Repository\PlatRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CategorieRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategorieController extends AbstractController
 {
@@ -20,10 +21,10 @@ class CategorieController extends AbstractController
     }
 
     #[Route('/categorie/{id}', 'categorie.plat')]
-    public function platCat( PlatRepository $platRepository, int $id) : Response
+    public function platCat(Categorie $categorie) : Response
     {
-        return $this->render('pages/plat/platCat.html.twig', [
-            'plats' => $platRepository->findBy(["categorie" => $id])
+        return $this->render('pages/categorie/platCat.html.twig', [
+            'categorie' => $categorie
         ]);
     }
 }

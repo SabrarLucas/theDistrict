@@ -14,7 +14,7 @@
             <div class="card border-primary mb-3" style="max-width: 20rem;">
                 <div class="card-header">{{ categorie.libelle }}</div>
                 <div class="card-body">
-                    <img src="{{ asset('images_the_district/category/') ~ categorie.image }}" alt="{{ categorie.image }}"  width="100%">
+                    <a href="{{ path('categorie.plat', { id: categorie.id }) }}"><img src="{{ asset('images_the_district/category/') ~ categorie.image }}" alt="{{ categorie.image }}"  width="100%"></a>
                 </div>
             </div>
         {% endfor %}
