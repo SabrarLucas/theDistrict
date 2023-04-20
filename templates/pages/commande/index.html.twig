@@ -5,8 +5,25 @@
 {% block body %}
     <div class="container">
         <h1 class="mt-4">Mes commandes</h1>
-        {% for plat in utilisateur.commandes %}
-            {{ commande.id }}
-        {% endfor %}
+        <table class="table table-hover mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Total (en €)</th>
+                    <th scope="col">Etat de la commande</th>
+                    <th scope="col">Détail</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for commande in utilisteur.commandes %}
+                <tr class="table-primary">
+                    <th scope="row">{{ commande.id }}</th>
+                    <td>{{ commande.total }}</td>
+                    <td>{{ commande.etat }}</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
