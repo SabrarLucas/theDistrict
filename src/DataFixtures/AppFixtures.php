@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Detail;
 use App\Entity\Plat;
 use App\Entity\Commande;
 use App\Entity\Categorie;
@@ -110,29 +111,51 @@ class AppFixtures extends Fixture
 
         $manager->persist($user2);
 
+        // Commandes
+
         $commande1 = new Commande();
-        $commande1->setDateCommande(new \DateTime)
-            ->setUtilisateur($user1)
+        $commande1->setUtilisateur($user1)
             ->setTotal(12.5)
             ->setEtat(0);
 
         $manager->persist($commande1);
 
         $commande2 = new Commande();
-        $commande2->setDateCommande(new \DateTime)
-            ->setUtilisateur($user1)
+        $commande2->setUtilisateur($user1)
             ->setTotal(20.85)
             ->setEtat(3);
 
         $manager->persist($commande2);
 
         $commande3 = new Commande();
-        $commande3->setDateCommande(new \DateTime)
-            ->setUtilisateur($user2)
+        $commande3->setUtilisateur($user2)
             ->setTotal(16.54)
             ->setEtat(0);
 
         $manager->persist($commande3);
+
+        // Details
+
+        $detail1 = new Detail();
+        $detail1->setCommande($commande1)
+            ->setPlat($plat5)
+            ->setQuantite(2);
+
+        $manager->persist($detail1);
+
+        $detail2 = new Detail();
+        $detail2->setCommande($commande2)
+            ->setPlat($plat2)
+            ->setQuantite(1);
+
+        $manager->persist($detail2);
+
+        $detail3 = new Detail();
+        $detail3->setCommande($commande3)
+            ->setPlat($plat4)
+            ->setQuantite(3);
+
+        $manager->persist($detail3);
 
         $manager->flush();
     }

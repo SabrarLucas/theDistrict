@@ -9,6 +9,7 @@
             {{ encore_entry_link_tags('app') }}
             <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css">
             <link rel="stylesheet" href="https://bootswatch.com/5/minty/_variables.scss">
+            <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
         {% endblock %}
 
         {% block javascripts %}
@@ -20,6 +21,11 @@
         {% block header %}
             {% include "partials/_header.html.twig" %}
         {% endblock %}
+        
         {% block body %}{% endblock %}
+        
+        {% block footer %}
+            {% include "partials/_footer.html.twig" %}
+        {% endblock %}
     </body>
 </html>

@@ -15,12 +15,12 @@
                 </tr>
             </thead>
             <tbody>
-            {% for commande in utilisteur.commandes %}
+            {% for commande in utilisateur.commandes %}
                 <tr class="table-primary">
-                    <th scope="row">{{ commande.id }}</th>
+                    <th scope="row">{{ commande.commandedAt | date('d/m/Y') }}</th>
                     <td>{{ commande.total }}</td>
                     <td>{{ commande.etat }}</td>
-                    <td></td>
+                    <td><a href="{{ path('commande.detail', {id: commande.id}) }}" class="btn btn-secondary">Détail</a></td>
                 </tr>
             {% endfor %}
             </tbody>

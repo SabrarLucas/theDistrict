@@ -16,8 +16,8 @@ class Commande
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_commande = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $commandedAt = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $total = null;
@@ -35,6 +35,7 @@ class Commande
     public function __construct()
     {
         $this->details = new ArrayCollection();
+        $this->commandedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -42,14 +43,14 @@ class Commande
         return $this->id;
     }
 
-    public function getDateCommande(): ?\DateTimeInterface
+    public function getCommandedAt(): ?\DateTimeImmutable
     {
-        return $this->date_commande;
+        return $this->commandedAt;
     }
 
-    public function setDateCommande(\DateTimeInterface $date_commande): self
+    public function setCommandedAt(\DateTimeImmutable $commandedAt): self
     {
-        $this->date_commande = $date_commande;
+        $this->commandedAt = $commandedAt;
 
         return $this;
     }

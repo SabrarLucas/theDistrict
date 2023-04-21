@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}The District - Détail de commande{% endblock %}
+
+{% block body %}
+<div class="container mt-4 mb-5">
+    {% for commande in commandes %}
+        {% for detail in details %}
+            {% for plat in plats %}
+                <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Commande du {{ commande.commandedAt | date('d/m/Y') }}</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Plat {{ plat.libelle }}</h4>
+                        <p class="card-text">Prix {{ plat.prix }}</p>
+                        <p class="card-text">quantite du {{ detail.quantite }}</p>
+                        <img src="{{ asset('images_the_district/food/') ~ plat.image }}" alt="{{ plat.libelle }}" width="100%">
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}
