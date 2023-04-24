@@ -71,7 +71,7 @@ class AppFixtures extends Fixture
 
         $plat4 = new Plat();
         $plat4->setLibelle("Sandwich fromage")
-            ->setDescription("Du pain du boulanger et un fromage qui vient du petit traiteru du village.")
+            ->setDescription("Du pain du boulanger et un fromage qui vient du petit traiteur du village.")
             ->setPrix(6.8)
             ->setImage("Food-Name-3631.jpg")
             ->setActive(true)

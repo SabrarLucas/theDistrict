@@ -28,8 +28,8 @@
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.prenom }}</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ path('commande', {id: app.user.id}) }}">Mes commandes</a>
-                                {# <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a> #}
+                                <a class="dropdown-item" href="{{ path('commande.panier', {id: app.user.id}) }}">Panier</a>
+                                {# <a class="dropdown-item" href="#">Something else here</a> #}
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ path('security.logout') }}">Deconnexion</a>
                             </div>

@@ -14,23 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CommandeController extends AbstractController
 {
     #[Route('/commande/{id}', name: 'commande')]
-    public function index(Utilisateur $utilisateur, Commande $commande): Response
+    public function index(Utilisateur $utilisateur): Response
     {
-        
-        // dd($etat);
-        // if($etat === 0) {
-        //     $phrase = "Enregistée/payée";
-        // }
-        // elseif($etat === 1) {
-        //     $phrase = "En préparation";
-        // }
-        // elseif($etat === 2) {
-        //     $phrase = "En cours de livraison";
-        // }
-        // elseif($etat === 3) {
-        //     $phrase = "Livrée";
-        // }
-
         return $this->render('pages/commande/index.html.twig', [
             'utilisateur' => $utilisateur
         ]);
@@ -44,5 +29,10 @@ class CommandeController extends AbstractController
             'details' => $detailRepository->findBy(['id' => $id]),
             'plats' => $platRepository->findBy(['id' => $id])
         ]);
+    }
+
+    #[Route('/panier/{id}', 'commande.panier', methods: ['GET'])]
+    public function panier(Utilisateur $utilisateur) : Response {
+        return $this->render('pages/commande/panier.html.twig');
     }
 }
