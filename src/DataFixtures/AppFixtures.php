@@ -130,7 +130,7 @@ class AppFixtures extends Fixture
         $commande3 = new Commande();
         $commande3->setUtilisateur($user2)
             ->setTotal(16.54)
-            ->setEtat(0);
+            ->setEtat(2);
 
         $manager->persist($commande3);
 

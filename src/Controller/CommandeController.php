@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Commande;
-use App\Entity\Detail;
 use App\Entity\Utilisateur;
 use App\Repository\DetailRepository;
 use App\Repository\CommandeRepository;
@@ -17,19 +16,23 @@ class CommandeController extends AbstractController
     #[Route('/commande/{id}', name: 'commande')]
     public function index(Utilisateur $utilisateur, Commande $commande): Response
     {
-        // $etat = $commande->getEtat();
         
-        // if($etat == 0) {
-        //     $phrase = "Enre";
+        // dd($etat);
+        // if($etat === 0) {
+        //     $phrase = "Enregistée/payée";
         // }
-        // else if($etat == 3) {
-        //     $phrase = "livrée";
+        // elseif($etat === 1) {
+        //     $phrase = "En préparation";
         // }
-        
+        // elseif($etat === 2) {
+        //     $phrase = "En cours de livraison";
+        // }
+        // elseif($etat === 3) {
+        //     $phrase = "Livrée";
+        // }
 
         return $this->render('pages/commande/index.html.twig', [
-            'utilisateur' => $utilisateur,
-            //'etat' => $phrase
+            'utilisateur' => $utilisateur
         ]);
     }
 

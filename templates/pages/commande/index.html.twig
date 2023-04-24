@@ -8,7 +8,7 @@
         <table class="table table-hover mt-4">
             <thead>
                 <tr>
-                    <th scope="col">Type</th>
+                    <th scope="col">Date de la commande</th>
                     <th scope="col">Total (en €)</th>
                     <th scope="col">Etat de la commande</th>
                     <th scope="col">Détail</th>
@@ -19,7 +19,20 @@
                 <tr class="table-primary">
                     <th scope="row">{{ commande.commandedAt | date('d/m/Y') }}</th>
                     <td>{{ commande.total }}</td>
-                    <td>{{ commande.etat }}</td>
+                    <td>
+                        {% if commande.etat == 0 %}
+                            Enregistée/payée
+                        {% endif %}
+                        {% if commande.etat == 1 %}
+                            En préparation
+                        {% endif %}
+                        {% if commande.etat == 2 %}
+                            en cours de livraison
+                        {% endif %}
+                        {% if commande.etat == 3 %}
+                            Livrée
+                        {% endif %}
+                    </td>
                     <td><a href="{{ path('commande.detail', {id: commande.id}) }}" class="btn btn-secondary">Détail</a></td>
                 </tr>
             {% endfor %}
