@@ -6,7 +6,7 @@
     <div class="container">
         <h1 class="mt-4">Mon panier</h1>
 
-        <table class="table table-hover">
+        <table class="table table-hover mt-4">
             <thead>
                 <tr>
                     <th scope="col">Plat</th>
@@ -18,7 +18,7 @@
             </thead>
             <tbody>
                 {% for element in dataPanier %}
-                    <tr class="table-secondary">
+                    <tr class="table-light">
                         <td>{{ element.plat.libelle }}</td>
                         <td class="text-end">{{ element.plat.prix }} €</td>
                         <td>{{ element.quantite }}</td>
@@ -36,13 +36,13 @@
                         </td>
                     </tr>
                 {% else %}
-                    <tr class="table-secondary">
+                    <tr class="table-light">
                         <td colspan="5" class="text-center">Votre panier est vide</td>
                     </tr>
                 {% endfor %}
             </tbody>
             <tfoot>
-                <tr>
+                <tr class="table-light">
                     <td colspan="3">Total</td>
                     <td class="text-end">{{ total }} €</td>
                     <td><a href="{{ path('panier.deleteAll') }}" class="btn btn-danger">

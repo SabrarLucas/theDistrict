@@ -16,7 +16,7 @@
             </thead>
             <tbody>
             {% for commande in utilisateur.commandes %}
-                <tr class="table-primary">
+                <tr class="table-light">
                     <th scope="row">{{ commande.commandedAt | date('d/m/Y') }}</th>
                     <td>{{ commande.total }}</td>
                     <td>
