@@ -34,7 +34,7 @@ class SecurityController extends AbstractController
     public function registration(Request $request, EntityManagerInterface $manager) : Response
     {
         $user = new Utilisateur();
-        $user ->setRoles(['ROLE_USER']);
+        $user->setRoles(['ROLE_USER']);
         $form = $this->createForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);
