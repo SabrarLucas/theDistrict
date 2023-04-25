@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Plat;
 use App\Repository\PlatRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PlatController extends AbstractController
 {
@@ -14,6 +15,14 @@ class PlatController extends AbstractController
     {
         return $this->render('pages/plat/index.html.twig', [
             'plats' => $platRepository->findAll()
+        ]);
+    }
+
+    #[Route('/plat/{id}', 'plat.detail')]
+    public function detailPlat(Plat $plat) : Response 
+    {
+        return $this->render('pages/plat/detail.html.twig', [
+            'plat' => $plat
         ]);
     }
 }

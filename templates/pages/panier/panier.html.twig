@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block title %}The District - Mon panier{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">Mon panier</h1>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Plat</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in dataPanier %}
+                    <tr class="table-secondary">
+                        <td>{{ element.plat.libelle }}</td>
+                        <td class="text-end">{{ element.plat.prix }} €</td>
+                        <td>{{ element.quantite }}</td>
+                        <td class="text-end">{{ element.quantite * element.plat.prix }} €</td>
+                        <td>
+                            <a href="{{ path('panier.add', {id: element.plat.id}) }}" class="btn btn-success">
+                                <i class="uil uil-plus-square"></i>
+                            </a>
+                            <a href="{{ path('panier.remove', {id: element.plat.id}) }}" class="btn btn-warning">
+                                <i class="uil uil-minus-square"></i>
+                            </a>
+                            <a href="{{ path('panier.delete', {id: element.plat.id}) }}" class="btn btn-danger">
+                                <i class="uil uil-times-square"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr class="table-secondary">
+                        <td colspan="5" class="text-center">Votre panier est vide</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Total</td>
+                    <td class="text-end">{{ total }} €</td>
+                    <td><a href="{{ path('panier.deleteAll') }}" class="btn btn-danger">
+                        <i class="uil uil-times-square"></i>
+                    </a></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}

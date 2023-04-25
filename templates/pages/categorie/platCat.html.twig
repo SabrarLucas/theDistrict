@@ -8,15 +8,12 @@
         <div class="d-flex justify-content-between">
             {% for plat in categorie.plats %}
                 {% if (plat.active != false) %}
-                    <div class="card border-secondary mb-3 mt-4" style="max-width: 20rem;">
+                    <div class="card border-secondary mt-4 mb-3" style="max-width: 20rem;">
                         <div class="card-header">{{ plat.libelle }}</div>
                         <div class="card-body">
-                            <img src="{{ asset('images_the_district/food/') ~ plat.image }}" alt="{{ plat.image }}"  width="100%">
-                            <p class="card-text mt-3">{{ plat.description }}</p>
-                            <p class="card-text">{{ plat.prix }} €</p>
-                        </div>
-                        <div class="card-body">
-                            <p class="btn btn-primary"><i class="uil uil-shopping-basket"></i> Ajouter</p>
+                            <a href="{{ path('plat.detail', { id: plat.id }) }}">
+                                <img src="{{ asset('images_the_district/food/') ~ plat.image }}" alt="{{ plat.image }}"  width="100%">
+                            </a>
                         </div>
                     </div>
                 {% endif %}

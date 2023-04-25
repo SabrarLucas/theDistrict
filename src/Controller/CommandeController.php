@@ -30,9 +30,4 @@ class CommandeController extends AbstractController
             'plats' => $platRepository->findBy(['id' => $id])
         ]);
     }
-
-    #[Route('/panier/{id}', 'commande.panier', methods: ['GET'])]
-    public function panier(Utilisateur $utilisateur) : Response {
-        return $this->render('pages/commande/panier.html.twig');
-    }
 }
