@@ -94,9 +94,9 @@ class AppFixtures extends Fixture
         $user1 = new Utilisateur();
         $user1->setNom('Pinchon')
             ->setPrenom('Lucas')
-            ->setEmail('Lucas.pinchon@mail.fr')
+            ->setEmail('lucas.pinchon@mail.fr')
             ->setTelephone('06 12 34 56 78')
-            ->setRoles(['ROLE_USER'])
+            ->setRoles(['ROLE_ADMIN'])
             ->setPlainPassword('password');
 
         $manager->persist($user1);
