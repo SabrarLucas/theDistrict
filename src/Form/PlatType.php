@@ -16,7 +16,10 @@ class PlatType extends AbstractType
     {
         $builder
             ->add('libelle', options: [
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'label_attr' => [
+                    'class' => 'label-form mt-4'
+                ]
             ])
             ->add('description')
             ->add('prix')

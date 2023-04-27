@@ -13,7 +13,12 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('libelle')
+            ->add('libelle', options: [
+                'label' => 'Nom',
+                'label_attr' => [
+                    'class' => 'label-form mt-4'
+                ]
+            ])
             ->add('image', FileType::class, [
                 'label' => false,
                 'attr' => [

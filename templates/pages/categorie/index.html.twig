@@ -8,14 +8,16 @@
         <h3 class="mt-4">Nos catégories</h3>
             <div class="d-flex justify-content-between">
                 {% for categorie in categories %}
-                    <div class="card border-secondary mt-4 mb-3" style="max-width: 20rem;">
-                        <div class="card-header">{{ categorie.libelle }}</div>
-                        <div class="card-body">
-                            <a href="{{ path('categorie.plat', { id: categorie.id }) }}">
-                                <img src="{{ asset('assets/uploads/categorie/mini/300x300-') ~ categorie.image }}" alt="{{ categorie.image }}"  width="100%">
-                            </a>
+                    {% if categorie.active != false %}
+                        <div class="card border-secondary mt-4 mb-3" style="max-width: 20rem;">
+                            <div class="card-header">{{ categorie.libelle }}</div>
+                            <div class="card-body">
+                                <a href="{{ path('categorie.plat', { id: categorie.id }) }}">
+                                    <img src="{{ asset('assets/uploads/categorie/mini/300x300-') ~ categorie.image }}" alt="{{ categorie.image }}"  width="100%">
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
