@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Plat;
 use App\Form\PlatType;
+use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class AdminPlatController extends AbstractController
     }
 
     #[Route('/ajout', 'add')]
-    public function add(Request $request, EntityManagerInterface $manager) : Response
+    public function add(Request $request, EntityManagerInterface $manager, PictureService $pictureService) : Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -30,6 +31,15 @@ class AdminPlatController extends AbstractController
         $platForm->handleRequest($request);
 
         if($platForm->isSubmitted() && $platForm->isValid()) {
+            $images = $platForm->get('image')->getData();
+            foreach($images as $image){
+                $folder = 'plat';
+
+                $fichier = $pictureService->add($image, $folder, 300, 300);
+
+                $plat->setImage($fichier);
+            }
+
             $plat = $platForm->getData();
             
             $manager->persist($plat);
