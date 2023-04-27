@@ -5,10 +5,13 @@ namespace App\Form;
 use App\Entity\Plat;
 use Proxies\__CG__\App\Entity\Categorie;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Mime\Message;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\Positive;
 
 class PlatType extends AbstractType
 {
@@ -22,13 +25,16 @@ class PlatType extends AbstractType
                 ]
             ])
             ->add('description')
-            ->add('prix')
+            ->add('prix', MoneyType::class, [
+                'constraints' => [
+                    new Positive([])
+                ]
+            ])
             ->add('image', FileType::class, [
                 'label' => false,
                 'attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'multiple' => true,
                 'mapped' => false,
             ])
             ->add('active')

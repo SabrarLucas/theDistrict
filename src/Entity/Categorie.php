@@ -16,6 +16,11 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Le nom du plat ne peut pas être vide')]
+    #[Assert\Length(
+        max: 50,
+        maxMessage: 'Le nom doit avoir 50 caractéres maximum'
+    )]
     private ?string $libelle = null;
 
     #[ORM\Column(length: 50)]

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
 class Plat
@@ -17,12 +18,19 @@ class Plat
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Le nom du plat ne peut pas être vide')]
+    #[Assert\Length(
+        max: 50,
+        maxMessage: 'Le nom doit avoir 50 caractéres maximum'
+    )]
     private ?string $libelle = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'La description ne peut pas être vide')]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
+    #[Assert\PositiveOrZero(message: 'le prix ne peut pas être négatif')]
     private ?string $prix = null;
 
     #[ORM\Column(length: 50)]
