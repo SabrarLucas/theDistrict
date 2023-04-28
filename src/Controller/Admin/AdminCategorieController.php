@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Categorie;
 use App\Form\CategorieType;
+use App\Repository\CategorieRepository;
 use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminCategorieController extends AbstractController
 {
     #[Route('/', 'index')]
-    public function index() : Response
+    public function index(CategorieRepository $categorieRepository) : Response
     {
-        return $this->render('admin/categories/index.html.twig');
+        return $this->render('admin/categories/index.html.twig', [
+            'categories' => $categorieRepository->findAll()
+        ]);
     }
 
     #[Route('/ajout', 'add')]

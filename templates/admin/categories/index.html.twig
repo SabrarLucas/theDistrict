@@ -1,14 +1,37 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Administration categories{% endblock %}
+{% block title %}Liste des categories{% endblock %}
 
 {% block body %}
 <div class="container">
-    <h1 class="mt-4">Administration des categories</h1>
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-dismissible alert-success mt-4">
-            {{ message }}
-        </div>
-    {% endfor %}
+    <div class="row">
+        {% include "partials/_adminnav.html.twig" %}
+        <main class="col-9">
+            <h1 class="mt-4">Liste des categories</h1>
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-dismissible alert-success mt-4">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for categorie in categories %}
+                        <tr>
+                            <td>{{ categorie.id }}</td>
+                            <td>{{ categorie.libelle }}</td>
+                            <td>{{ categorie.image }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </div>
 </div>
 {% endblock %}

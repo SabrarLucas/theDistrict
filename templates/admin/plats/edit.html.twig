@@ -4,7 +4,12 @@
 
 {% block body %}
 <div class="container">
-    <h1 class="mt-4">Modifié un plat</h1>
-    {% include "admin/plats/_form.html.twig" with {'button_label': 'Modifier'} %}
+    <div class="row">
+        {% include "partials/_adminnav.html.twig" %}
+        <main class="col-9">
+            <h1 class="mt-4">Modifié un plat</h1>
+            {% include "admin/plats/_form.html.twig" with {'button_label': 'Modifier'} %}
+        </main>
+    </div>
 </div>
 {% endblock %}

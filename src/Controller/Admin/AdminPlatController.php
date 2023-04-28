@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Plat;
 use App\Form\PlatType;
+use App\Repository\PlatRepository;
 use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminPlatController extends AbstractController
 {
     #[Route('/', 'index')]
-    public function index() : Response
+    public function index(PlatRepository $platRepository) : Response
     {
-        return $this->render('admin/plats/index.html.twig');
+        return $this->render('admin/plats/index.html.twig', [
+            'plats' => $platRepository->findAll()
+        ]);
     }
 
     #[Route('/ajout', 'add')]
