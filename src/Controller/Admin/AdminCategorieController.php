@@ -28,22 +28,20 @@ class AdminCategorieController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $categorie = new Categorie;
+        $categorie = new Categorie();
         $categorieForm = $this->createForm(CategorieType::class, $categorie);
 
         $categorieForm->handleRequest($request);
 
         if($categorieForm->isSubmitted() && $categorieForm->isValid()) {
-            $images = $categorieForm->get('image')->getData();
-            foreach($images as $image){
-                $folder = 'categorie';
 
-                $fichier = $pictureService->add($image, $folder, 300, 300);
+            $image = $categorieForm->get('image')->getData();
 
-                $categorie->setImage($fichier);
-            }
+            $folder = 'categorie';
 
-            $categorie = $categorieForm->getData();
+            $fichier = $pictureService->add($image, $folder, 300, 300);
+
+            $categorie->setImage($fichier);
             
             $manager->persist($categorie);
             $manager->flush();
@@ -91,11 +89,19 @@ class AdminCategorieController extends AbstractController
     }
 
     #[Route('/suppression/{id}', 'delete')]
-    public function delete(Categorie $categorie) : Response
+    public function delete(Categorie $categorie, EntityManagerInterface $manager) : Response
     {
         // On verifie sur l'user peut supprimer avec les voter
         $this->denyAccessUnlessGranted('CATEGORIE_DELETE', $categorie);
+
+        $manager->remove($categorie);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'La categorie a bien été supprimé'
+        );
         
-        return $this->render('admin/categories/index.html.twig');
+        return $this->redirectToRoute('admin_categorie_index');
     }
 }

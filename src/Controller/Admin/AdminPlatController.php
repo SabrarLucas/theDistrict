@@ -34,16 +34,14 @@ class AdminPlatController extends AbstractController
         $platForm->handleRequest($request);
 
         if($platForm->isSubmitted() && $platForm->isValid()) {
-            $images = $platForm->get('image')->getData();
-            foreach($images as $image){
-                $folder = 'plat';
 
-                $fichier = $pictureService->add($image, $folder, 300, 300);
+            $image = $platForm->get('image')->getData();
 
-                $plat->setImage($fichier);
-            }
+            $folder = 'plat';
 
-            $plat = $platForm->getData();
+            $fichier = $pictureService->add($image, $folder, 300, 300);
+
+            $plat->setImage($fichier);
             
             $manager->persist($plat);
             $manager->flush();
@@ -62,7 +60,7 @@ class AdminPlatController extends AbstractController
     }
 
     #[Route('/edition/{id}', 'edit')]
-    public function edit(Plat $plat, Request $request, EntityManagerInterface $manager) : Response
+    public function edit(Plat $plat, Request $request, EntityManagerInterface $manager, PictureService $pictureService) : Response
     {
         // On verifie sur l'user peut editer avec les voter
         $this->denyAccessUnlessGranted('PLAT_EDIT', $plat);
@@ -72,14 +70,21 @@ class AdminPlatController extends AbstractController
         $platForm->handleRequest($request);
 
         if($platForm->isSubmitted() && $platForm->isValid()) {
+            $image = $platForm->get('image')->getData();
             $plat = $platForm->getData();
-            
+            foreach($image as $images){
+                $folder = 'plat';
+
+                $fichier = $pictureService->add($images, $folder, 300, 300);
+
+                $plat->setImage($fichier);
+            }
             $manager->persist($plat);
             $manager->flush();
 
             $this->addFlash(
                 'success',
-                'Le plat à bien été modifié.'
+                'Le plat à bien été ajouté.'
             );
 
             return $this->redirectToRoute('admin_plat_index');
@@ -91,11 +96,19 @@ class AdminPlatController extends AbstractController
     }
 
     #[Route('/suppression/{id}', 'delete')]
-    public function delete(Plat $plat) : Response
+    public function delete(Plat $plat, EntityManagerInterface $manager) : Response
     {
-        // On verifie sur l'user peut supprimer avec les voter
+        // On verifie que l'user peut supprimer avec les voter
         $this->denyAccessUnlessGranted('PLAT_DELETE', $plat);
+
+        $manager->remove($plat);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'Le plat a bien été supprimé'
+        );
         
-        return $this->render('admin/plats/index.html.twig');
+        return $this->redirectToRoute('admin_plat_index');
     }
 }

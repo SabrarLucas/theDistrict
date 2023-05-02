@@ -24,7 +24,6 @@ class CategorieType extends AbstractType
                 'attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'multiple' => true,
                 'mapped' => false,
             ])
             ->add('active')

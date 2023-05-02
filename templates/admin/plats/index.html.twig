@@ -3,7 +3,7 @@
 {% block title %}Liste plats{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container mb-5">
     <div class="row">
         {% include "partials/_adminnav.html.twig" %}
         <main class="col-9">
@@ -13,7 +13,7 @@
                     {{ message }}
                 </div>
             {% endfor %}
-            <table class="table table-hover">
+            <table class="table table-hover mt-4">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -22,6 +22,7 @@
                         {# <th scope="col">Description</th> #}
                         <th scope="col">Prix</th>
                         <th scope="col">Image</th>
+                        <th scope="col">Active</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,7 +33,10 @@
                             <td>{{ plat.libelle }}</td>
                             {# <td>{{ plat.description }}</td> #}
                             <td>{{ plat.prix }}</td>
-                            <td>{{ plat.image }}</td>
+                            <td><img src="{{ asset('assets/uploads/plat/mini/300x300-' ~ plat.image) }}" alt="{{ plat.libelle }}"></td>
+                            <td>{{ plat.active }}</td>
+                            <td><a href="{{ path('admin_plat_edit', {id: plat.id}) }}" class="btn btn-primary">Modifier</a></td>
+                            <td><a href="{{ path('admin_plat_delete', {id: plat.id}) }}" class="btn btn-danger">Supprimer</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

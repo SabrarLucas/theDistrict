@@ -3,7 +3,7 @@
 {% block title %}Liste des categories{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container mb-5">
     <div class="row">
         {% include "partials/_adminnav.html.twig" %}
         <main class="col-9">
@@ -16,9 +16,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nom</th>
-                        <th>Image</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Active</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,7 +27,10 @@
                         <tr>
                             <td>{{ categorie.id }}</td>
                             <td>{{ categorie.libelle }}</td>
-                            <td>{{ categorie.image }}</td>
+                            <td><img src="{{ asset('assets/uploads/categorie/mini/300x300-' ~ categorie.image) }}" alt="{{ categorie.libelle }}"></td>
+                            <td>{{ categorie.active }}</td>
+                            <td><a href="{{ path('admin_categorie_edit', {id: categorie.id}) }}" class="btn btn-primary">Modifier</a></td>
+                            <td><a href="{{ path('admin_categorie_delete', {id: categorie.id}) }}" class="btn btn-danger">Supprimer</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
