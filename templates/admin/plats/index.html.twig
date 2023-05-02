@@ -35,7 +35,7 @@
                             <td>{{ plat.prix }}</td>
                             <td><img src="{{ asset('assets/uploads/plat/mini/300x300-' ~ plat.image) }}" alt="{{ plat.libelle }}"></td>
                             <td>{{ plat.active }}</td>
-                            <td><a href="{{ path('admin_plat_edit', {id: plat.id}) }}" class="btn btn-primary">Modifier</a></td>
+                            <td><a href="{{ path('admin_plat_edit', {id: plat.id}) }}" class="btn btn-warning">Modifier</a></td>
                             <td><a href="{{ path('admin_plat_delete', {id: plat.id}) }}" class="btn btn-danger">Supprimer</a></td>
                         </tr>
                     {% endfor %}

@@ -9,7 +9,7 @@
             <div class="d-flex justify-content-between">
                 {% for plat in plats %}
                     {% if plat.active != false %}
-                        <div class="card border-secondary mt-4 mb-3" style="max-width: 20rem;">
+                        <div class="card border-warning mt-4 mb-3" style="max-width: 20rem;">
                             <div class="card-header">{{ plat.libelle }}</div>
                             <div class="card-body">
                                 <a href="{{ path('plat.detail', { id: plat.id }) }}">

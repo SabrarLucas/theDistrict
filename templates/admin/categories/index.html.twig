@@ -29,7 +29,7 @@
                             <td>{{ categorie.libelle }}</td>
                             <td><img src="{{ asset('assets/uploads/categorie/mini/300x300-' ~ categorie.image) }}" alt="{{ categorie.libelle }}"></td>
                             <td>{{ categorie.active }}</td>
-                            <td><a href="{{ path('admin_categorie_edit', {id: categorie.id}) }}" class="btn btn-primary">Modifier</a></td>
+                            <td><a href="{{ path('admin_categorie_edit', {id: categorie.id}) }}" class="btn btn-warning">Modifier</a></td>
                             <td><a href="{{ path('admin_categorie_delete', {id: categorie.id}) }}" class="btn btn-danger">Supprimer</a></td>
                         </tr>
                     {% endfor %}

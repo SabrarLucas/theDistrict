@@ -7,7 +7,7 @@
     {% for commande in commandes %}
         {% for detail in details %}
             {% for plat in plats %}
-                <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                <div class="card border-warning mb-3" style="max-width: 20rem;">
                     <div class="card-header">Commande du {{ commande.commandedAt | date('d/m/Y') }}</div>
                     <div class="card-body">
                         <h4 class="card-title">Plat {{ plat.libelle }}</h4>
