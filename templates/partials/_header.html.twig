@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        {# <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('images_the_district/the_district_brand/logo.png') }}" alt="logo" width="100px"></a> #}
         <a class="navbar-brand ms-3" href="{{ path('home') }}">
             <img src="{{ asset('logoDistrict.png') }}" alt="logo" width="200px">
         </a>
@@ -17,18 +16,16 @@
                     <a class="nav-link fs-3" href="{{ path('plat') }}">Plats
                     </a>
                 </li>
-                {% if app.user %} 
-                    <li class="nav-item">
-                        <a class="nav-link fs-3" href="#">Contact
-                        </a>
-                    </li>
-                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link fs-3" href="{{ path('contact') }}">Contact
+                    </a>
+                </li>
             </ul>
             <div class="d-flex">
                 <ul class="navbar-nav me-auto">
                     {% if app.user %}
                         <li class="nav-item dropdown" style="margin-right: 7.5rem">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.prenom }}</a>
+                            <a class="nav-link dropdown-toggle fs-4" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.prenom }}</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ path('commande', {id: app.user.id}) }}">Mes commandes</a>
                                 <a class="dropdown-item" href="{{ path('panier') }}">Panier</a>
@@ -42,11 +39,11 @@
                         </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('security.login') }}">Connexion
+                        <a class="nav-link fs-3" href="{{ path('security.login') }}">Connexion
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('security.register') }}">Inscription
+                        <a class="nav-link fs-3" href="{{ path('security.register') }}">Inscription
                         </a>
                     </li>
                     {% endif %}

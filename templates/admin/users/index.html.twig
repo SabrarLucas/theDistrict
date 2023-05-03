@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des utilisateurs
+{% endblock %}
+
+{% block body %}
+    <div class="container mb-5">
+        <div class="row">
+            {% include "partials/_adminnav.html.twig" %}
+            <main class="col-9">
+                <h1 class="mt-4">Liste des utilisateurs</h1>
+                <table class="table table-hover mt-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prenom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.nom }}</td>
+                                <td>{{ user.prenom }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% for role in user.roles %}
+                                        {% if role == "ROLE_ADMIN" %}
+                                            {% set name = "Administrateur" %}
+                                            {% set color = "danger" %}
+                                        {% else %}
+                                            {% set name = "Membre" %}
+                                            {% set color = "success" %}
+                                        {% endif %}
+                                        <span class="badge rounded-pill bg-{{ color }}">{{ name }}</span>
+                                    {% endfor %}
+                                </td>
+                                <td><a href="#" class="btn btn-warning">Modifier</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+            </main>
+        </div>
+    </div>
+{% endblock %}

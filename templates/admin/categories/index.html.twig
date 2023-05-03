@@ -28,7 +28,12 @@
                             <td>{{ categorie.id }}</td>
                             <td>{{ categorie.libelle }}</td>
                             <td><img src="{{ asset('assets/uploads/categorie/mini/300x300-' ~ categorie.image) }}" alt="{{ categorie.libelle }}"></td>
-                            <td>{{ categorie.active }}</td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="switch{{ categorie.id }}" {{ categorie.active ? "checked" : "" }} disabled>
+                                    <label class="form-check-label" for="switch{{ categorie.id }}"></label>
+                                </div>
+                            </td>
                             <td><a href="{{ path('admin_categorie_edit', {id: categorie.id}) }}" class="btn btn-warning">Modifier</a></td>
                             <td><a href="{{ path('admin_categorie_delete', {id: categorie.id}) }}" class="btn btn-danger">Supprimer</a></td>
                         </tr>

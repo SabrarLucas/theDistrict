@@ -34,7 +34,12 @@
                             {# <td>{{ plat.description }}</td> #}
                             <td>{{ plat.prix }}</td>
                             <td><img src="{{ asset('assets/uploads/plat/mini/300x300-' ~ plat.image) }}" alt="{{ plat.libelle }}"></td>
-                            <td>{{ plat.active }}</td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="switch{{ plat.id }}" {{ plat.active ? "checked" : "" }} disabled>
+                                    <label class="form-check-label" for="switch{{ plat.id }}"></label>
+                                </div>
+                            </td>
                             <td><a href="{{ path('admin_plat_edit', {id: plat.id}) }}" class="btn btn-warning">Modifier</a></td>
                             <td><a href="{{ path('admin_plat_delete', {id: plat.id}) }}" class="btn btn-danger">Supprimer</a></td>
                         </tr>

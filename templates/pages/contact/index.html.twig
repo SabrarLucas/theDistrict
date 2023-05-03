@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The District - Contact{% endblock %}
+
+{% block body %}
+    <div class="container mt-4 mb-5">
+        <div class="row">
+            <h1 class="mt-4 mb-4 d-flex justify-content-center">Formulaire de contact</h1>
+            <div class="col-4">
+                <img src="{{ asset('serveur-removebg-preview.png') }}" alt="serveur">
+            </div>
+            <div class="col-8">
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
