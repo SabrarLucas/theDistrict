@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Plat;
+use App\Entity\Commande;
 use App\Repository\PlatRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PanierController extends AbstractController
 {
@@ -88,5 +91,29 @@ class PanierController extends AbstractController
         $session->remove("panier");
 
         return $this->redirectToRoute("panier");
+    }
+
+    #[Route('/panier/payer', 'panier.payer')]
+    public function payer(Commande $commande, Request $request, EntityManagerInterface $manager): Response
+    {
+        $commande = new Commande();
+        $form = $this->createForm(CommandeType::class, $commande);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $commande = $form->getData();
+
+            $manager->persist($commande);
+            $manager->flush();
+
+            return $this->redirectToRoute('security.login');
+        }
+
+        dd($commande);
+
+        return $this->render('pages/panier/payer.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }
