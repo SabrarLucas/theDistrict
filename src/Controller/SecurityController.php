@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\RegistrationType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -3,19 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\Utilisateur;
 use App\Form\ContactType;
+use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'contact')]
-    public function index(Request $request, EntityManagerInterface $manager, MailerInterface $mailer): Response
+    public function index(Request $request, EntityManagerInterface $manager, SendMailService $mail): Response
     {
         $contact = new Contact();
 
@@ -36,14 +36,16 @@ class ContactController extends AbstractController
             $manager->flush();
 
             // Email
-            $email = (new Email())
-                ->from('hello@example.com')
-                ->to('you@example.com')
-                ->subject('Time for Symfony Mailer!')
-                ->text('Sending emails is fun again!')
-                ->html('<p>See Twig integration for better HTML integration!</p>');
-
-            $mailer->send($email);
+            $mail->send(
+                $contact->getEmail(),
+                'TheDistrict@mail.fr',
+                $contact->getSujet(),
+                'email',
+                [
+                    'sujet' => $contact->getSujet(),
+                    'message' => $contact->getMessage(),
+                ]
+            );
 
             $this->addFlash(
                 'success',
@@ -53,8 +55,8 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('contact');
         }
 
-        return $this->render('pages/contact/index.html.twig', [
-            'form' => $form->createView()
+        return $this->render('pages/contact/contact.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
