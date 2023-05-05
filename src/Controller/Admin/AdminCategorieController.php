@@ -60,7 +60,7 @@ class AdminCategorieController extends AbstractController
     }
 
     #[Route('/edition/{id}', 'edit')]
-    public function edit(Categorie $categorie, Request $request, EntityManagerInterface $manager) : Response
+    public function edit(Categorie $categorie, Request $request, EntityManagerInterface $manager, PictureService $pictureService) : Response
     {
         // On verifie sur l'user peut editer avec les voter
         $this->denyAccessUnlessGranted('CATEGORIE_EDIT', $categorie);
@@ -70,10 +70,17 @@ class AdminCategorieController extends AbstractController
         $categorieForm->handleRequest($request);
 
         if($categorieForm->isSubmitted() && $categorieForm->isValid()) {
-            $categorie = $categorieForm->getData();
+            $image = $categorieForm->get('image')->getData();
+
+            $folder = 'categorie';
+
+            $fichier = $pictureService->add($image, $folder, 300, 300);
+
+            $categorie->setImage($fichier);
             
             $manager->persist($categorie);
             $manager->flush();
+
 
             $this->addFlash(
                 'success',

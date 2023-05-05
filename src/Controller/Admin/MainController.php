@@ -15,12 +15,4 @@ class MainController extends AbstractController
     {
         return $this->render('admin/index.html.twig');
     }
-
-    #[Route('/users', 'user')]
-    public function users(UtilisateurRepository $utilisateurRepository): Response
-    {
-        return $this->render('admin/users/index.html.twig', [
-            'users' => $utilisateurRepository->findAll()
-        ]);
-    }
 }

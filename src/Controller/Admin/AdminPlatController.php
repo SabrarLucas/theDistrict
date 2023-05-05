@@ -71,14 +71,15 @@ class AdminPlatController extends AbstractController
 
         if($platForm->isSubmitted() && $platForm->isValid()) {
             $image = $platForm->get('image')->getData();
+
             $plat = $platForm->getData();
-            foreach($image as $images){
-                $folder = 'plat';
+            
+            $folder = 'plat';
 
-                $fichier = $pictureService->add($images, $folder, 300, 300);
+            $fichier = $pictureService->add($image, $folder, 300, 300);
 
-                $plat->setImage($fichier);
-            }
+            $plat->setImage($fichier);
+
             $manager->persist($plat);
             $manager->flush();
 
