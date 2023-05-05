@@ -36,7 +36,7 @@ class UserType extends AbstractType
                     'Admin' => 'ROLE_ADMIN',
                     'Membre' => 'ROLE_USER',
                 ],
-                'expanded'  => false, // liste déroulante
+                'expanded'  => true, // liste déroulante
                 'multiple'  => true, // choix multiple
             ])
             ->add('nom', TextType::class, [
