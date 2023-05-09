@@ -4,16 +4,18 @@
 
 {% block body %}
     <div class="container mt-4">
-        <h1>Les {{ categorie.libelle }}</h1>
-        <div class="d-flex justify-content-between">
+        <div class="row">
+            <h1>Les {{ categorie.libelle }}</h1>
             {% for plat in categorie.plats %}
                 {% if (plat.active != false) %}
-                    <div class="card border-warning mt-4 mb-3" style="max-width: 20rem;">
-                        <div class="card-header">{{ plat.libelle }}</div>
-                        <div class="card-body">
-                            <a href="{{ path('plat.detail', { id: plat.id }) }}">
-                                <img src="{{ asset('assets/uploads/plat/mini/300x300-') ~ plat.image }}" alt="{{ plat.image }}"  width="100%">
-                            </a>
+                    <div class="col-4">
+                        <div class="card border-warning mt-4 mb-3" style="max-width: 20rem;">
+                            <div class="card-header">{{ plat.libelle }}</div>
+                            <div class="card-body">
+                                <a href="{{ path('plat.detail', { id: plat.id }) }}">
+                                    <img src="{{ asset('assets/uploads/plat/mini/300x300-') ~ plat.image }}" alt="{{ plat.image }}"  width="100%">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 {% endif %}
