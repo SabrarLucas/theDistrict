@@ -27,7 +27,6 @@ class CommandeController extends AbstractController
         return $this->render('pages/commande/detail.html.twig', [
             'commandes' => $commande->findBy(['id' => $id]),
             'details' => $detailRepository->findBy(['id' => $id]),
-            'plats' => $platRepository->findBy(['id' => $id])
         ]);
     }
 }

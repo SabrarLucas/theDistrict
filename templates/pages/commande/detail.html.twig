@@ -6,17 +6,15 @@
 <div class="container mt-4 mb-5">
     {% for commande in commandes %}
         {% for detail in details %}
-            {% for plat in plats %}
                 <div class="card border-warning mb-3" style="max-width: 20rem;">
                     <div class="card-header">Commande du {{ commande.commandedAt | date('d/m/Y') }}</div>
                     <div class="card-body">
-                        <h4 class="card-title">Plat {{ plat.libelle }}</h4>
-                        <p class="card-text">Prix {{ plat.prix }}</p>
+                        <h4 class="card-title">Plat {{ detail.plat.libelle }}</h4>
+                        <p class="card-text">Prix {{ commande.total }}</p>
                         <p class="card-text">quantite commandée {{ detail.quantite }}</p>
-                        <img src="{{ asset('assets/uploads/plat/mini/300x300-') ~ plat.image }}" alt="{{ plat.libelle }}" width="100%">
+                        <img src="{{ asset('assets/uploads/plat/mini/300x300-') ~ detail.plat.image }}" alt="{{ detail.plat.libelle }}" width="100%">
                     </div>
                 </div>
-            {% endfor %}
         {% endfor %}
     {% endfor %}
 </div>

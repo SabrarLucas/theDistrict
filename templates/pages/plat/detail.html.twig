@@ -3,11 +3,10 @@
 {% block title %}The District - Détail{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container mt-4 mb-5">
         <div class="row">
             <h1 class="mt-4">Détail {{ plat.libelle }}</h1>
-
-            <div class="d-flex justify-content-center">
+            <div class="">
                 <div class="card border-warning mt-4 mb-3" style="max-width: 30rem;">
                     <div class="card-header">
                         <img src="{{ asset('assets/uploads/plat/mini/300x300-') ~ plat.image }}" alt="{{ plat.libelle }}" width="100%">

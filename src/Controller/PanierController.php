@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Detail;
 use App\Entity\Plat;
 use App\Entity\Commande;
 use App\Repository\PlatRepository;
@@ -94,26 +95,37 @@ class PanierController extends AbstractController
     }
 
     #[Route('/panier/payer', 'panier.payer')]
-    public function payer(Commande $commande, Request $request, EntityManagerInterface $manager): Response
+    public function payer(Request $request, SessionInterface $session, PlatRepository $platRepository, EntityManagerInterface $manager): Response
     {
         $commande = new Commande();
-        $form = $this->createForm(CommandeType::class, $commande);
+        $detail = new Detail();
 
-        $form->handleRequest($request);
+        $panier = $session->get("panier", []);
 
-        if($form->isSubmitted() && $form->isValid()) {
-            $commande = $form->getData();
-
-            $manager->persist($commande);
-            $manager->flush();
-
-            return $this->redirectToRoute('security.login');
+        $dataPanier = [];
+        $total = 0;
+        
+        foreach($panier as $id => $quantite) {
+            $plat = $platRepository->find($id);
+            $dataPanier[] = [
+                "plat" => $plat,
+                "quantite" => $quantite
+            ];
+            $total += $plat->getPrix() * $quantite;
         }
 
-        dd($commande);
+        $commande->setEtat(0)
+            ->setUtilisateur($this->getUser())
+            ->setTotal($total);
 
-        return $this->render('pages/panier/payer.html.twig', [
-            'form' => $form->createView()
-        ]);
+        $detail->setCommande($commande)
+            ->setPlat($plat)
+            ->setQuantite($quantite);
+
+        $manager->persist($commande);
+        $manager->persist($detail);
+        $manager->flush();
+
+        return $this->render('pages/panier/payer.html.twig');
     }
 }
