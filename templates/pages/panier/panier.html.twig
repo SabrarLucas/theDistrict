@@ -4,56 +4,64 @@
 
 {% block body %}
     <div class="container mt-4 mb-5">
-        <h1 class="mt-4">Mon panier</h1>
-
-        <table class="table table-hover mt-4">
-            <thead>
-                <tr class="table-dark">
-                    <th scope="col">Plat</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col">Quantité</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% set total = 0 %}
-                {% for element in dataPanier %}
-                {% set total = total + (element.quantite * element.plat.prix) %}
-                    <tr class="table-light">
-                        <td>{{ element.plat.libelle }}</td>
-                        <td class="text-center">{{ element.plat.prix }} €</td>
-                        <td class="text-center">{{ element.quantite }}</td>
-                        <td class="text-start">{{ element.quantite * element.plat.prix }} €</td>
-                        <td>
-                            <a href="{{ path('panier.add', {id: element.plat.id}) }}" class="btn btn-success">
-                                <i class="uil uil-plus-square"></i>
-                            </a>
-                            <a href="{{ path('panier.remove', {id: element.plat.id}) }}" class="btn btn-warning">
-                                <i class="uil uil-minus-square"></i>
-                            </a>
-                            <a href="{{ path('panier.delete', {id: element.plat.id}) }}" class="btn btn-danger">
-                                <i class="uil uil-times-square"></i>
-                            </a>
-                        </td>
+        <div class="row">
+            <h1 class="mt-4">Mon panier</h1>
+            <table class="table table-hover mt-4 col-12">
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col">Plat</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Actions</th>
                     </tr>
-                {% else %}
+                </thead>
+                <tbody>
+                    {% set total = 0 %}
+                    {% for element in dataPanier %}
+                    {% set total = total + (element.quantite * element.plat.prix) %}
+                        <tr class="table-light">
+                            <td>{{ element.plat.libelle }}</td>
+                            <td class="text-center">{{ element.plat.prix }} €</td>
+                            <td class="text-center">{{ element.quantite }}</td>
+                            <td class="text-start">{{ element.quantite * element.plat.prix }} €</td>
+                            <td>
+                                <a href="{{ path('panier.add', {id: element.plat.id}) }}" class="btn btn-success">
+                                    <i class="uil uil-plus-square"></i>
+                                </a>
+                                <a href="{{ path('panier.remove', {id: element.plat.id}) }}" class="btn btn-warning">
+                                    <i class="uil uil-minus-square"></i>
+                                </a>
+                                <a href="{{ path('panier.delete', {id: element.plat.id}) }}" class="btn btn-danger">
+                                    <i class="uil uil-times-square"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr class="table-light">
+                            <td colspan="5" class="text-center">Votre panier est vide</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot class="d-none d-sm-block">
                     <tr class="table-light">
-                        <td colspan="5" class="text-center">Votre panier est vide</td>
+                        <td colspan="2">Total</td>
+                        <td class="text-end">{{ total }} €</td>
+                        <td></td>
+                        <td><a href="{{ path('panier.payer') }}" class="btn btn-success">Payer</a>
+                        <a href="{{ path('panier.deleteAll') }}" class="btn btn-danger">
+                            <i class="uil uil-times-square"></i>
+                        </a></td>
                     </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr class="table-light">
-                    <td colspan="2">Total</td>
-                    <td class="text-end">{{ total }} €</td>
-                    <td></td>
-                    <td><a href="{{ path('panier.payer') }}" class="btn btn-success">Payer</a>
+                </tfoot>
+            </table>
+            <div class="d-block d-sm-none d-flex justify-content-center">
+                <td><a href="{{ path('panier.payer') }}" class="btn btn-success">Payer {{ total }} €</a>
                     <a href="{{ path('panier.deleteAll') }}" class="btn btn-danger">
                         <i class="uil uil-times-square"></i>
-                    </a></td>
-                </tr>
-            </tfoot>
-        </table>
+                    </a>
+                </td>
+            </div>
+        </div>
     </div>
 {% endblock %}

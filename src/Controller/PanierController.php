@@ -126,6 +126,6 @@ class PanierController extends AbstractController
         $manager->persist($detail);
         $manager->flush();
 
-        return $this->redirectToRoute('commande');
+        return $this->redirectToRoute('home');
     }
 }

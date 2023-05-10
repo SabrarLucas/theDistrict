@@ -8,7 +8,7 @@
             <h1 class="mt-4">Nos plats</h1>
             {% for plat in plats %}
                 {% if plat.active != false and plat.categorie.active != false %}
-                    <div class="col-4">
+                    <div class="col-md-4 d-flex justify-content-center">
                         <div class="card border-warning mt-4 mb-3" style="max-width: 20rem;">
                             <div class="card-header">{{ plat.libelle }}</div>
                             <div class="card-body">
