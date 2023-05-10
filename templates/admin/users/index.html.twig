@@ -4,8 +4,9 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container mt-4 mb-5">
+    <div class="container-fluid mt-4 mb-5">
         <div class="row">
+            <h1 class="mt-4">Administration</h1>
             {% include "partials/_adminnav.html.twig" %}
             <main class="col-9">
                 <h1 class="mt-4">Liste des utilisateurs</h1>
@@ -22,6 +23,10 @@
                             <th scope="col">Prenom</th>
                             <th scope="col">Email</th>
                             <th scope="col">Role</th>
+                            <th scope="col">Télephone</th>
+                            <th scope="col">Adresse</th>
+                            <th scope="col">CP</th>
+                            <th scope="col">Ville</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -44,6 +49,10 @@
                                         <span class="badge rounded-pill bg-{{ color }}">{{ name }}</span>
                                     {% endfor %}
                                 </td>
+                                <td>{{ user.telephone }}</td>
+                                <td>{{ user.adresse }}</td>
+                                <td>{{ user.cp }}</td>
+                                <td>{{ user.ville }}</td>
                                 <td><a href="{{ path('admin_user_edit', {id: user.id}) }}" class="btn btn-warning">Modifier</a></td>
                             </tr>
                         {% endfor %}

@@ -8,7 +8,7 @@
 
         <table class="table table-hover mt-4">
             <thead>
-                <tr>
+                <tr class="table-dark">
                     <th scope="col">Plat</th>
                     <th scope="col">Prix</th>
                     <th scope="col">Quantité</th>
@@ -24,7 +24,7 @@
                         <td>{{ element.plat.libelle }}</td>
                         <td class="text-center">{{ element.plat.prix }} €</td>
                         <td class="text-center">{{ element.quantite }}</td>
-                        <td class="text-center">{{ element.quantite * element.plat.prix }} €</td>
+                        <td class="text-start">{{ element.quantite * element.plat.prix }} €</td>
                         <td>
                             <a href="{{ path('panier.add', {id: element.plat.id}) }}" class="btn btn-success">
                                 <i class="uil uil-plus-square"></i>
@@ -47,8 +47,9 @@
                 <tr class="table-light">
                     <td colspan="2">Total</td>
                     <td class="text-end">{{ total }} €</td>
-                    <td><a href="{{ path('panier.payer') }}" class="btn btn-success">Payer</a></td>
-                    <td><a href="{{ path('panier.deleteAll') }}" class="btn btn-danger">
+                    <td></td>
+                    <td><a href="{{ path('panier.payer') }}" class="btn btn-success">Payer</a>
+                    <a href="{{ path('panier.deleteAll') }}" class="btn btn-danger">
                         <i class="uil uil-times-square"></i>
                     </a></td>
                 </tr>

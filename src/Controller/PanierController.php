@@ -126,6 +126,6 @@ class PanierController extends AbstractController
         $manager->persist($detail);
         $manager->flush();
 
-        return $this->render('pages/panier/payer.html.twig');
+        return $this->redirectToRoute('commande');
     }
 }

@@ -7,7 +7,7 @@
         <h1 class="mt-4">Mes commandes</h1>
         <table class="table table-hover mt-4">
             <thead>
-                <tr>
+                <tr class="table-dark">
                     <th scope="col">Date de la commande</th>
                     <th scope="col">Total (en €)</th>
                     <th scope="col">Etat de la commande</th>
@@ -33,7 +33,7 @@
                             Livrée
                         {% endif %}
                     </td>
-                    <td><a href="{{ path('commande.detail', {id: commande.id}) }}" class="btn btn-secondary">Détail</a></td>
+                    <td><a href="{{ path('commande.detail', {id: commande.id}) }}" class="btn btn-dark">Détail</a></td>
                 </tr>
             {% endfor %}
             </tbody>
