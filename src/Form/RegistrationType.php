@@ -21,6 +21,7 @@ class RegistrationType extends AbstractType
             ->add('nom', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Nom',
                     'max-lenght' => '50'
                 ],
                 'label' => 'Nom',
@@ -35,6 +36,7 @@ class RegistrationType extends AbstractType
             ->add('prenom', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Prénom',
                     'max-lenght' => '50'
                 ],
                 'label' => 'Prénom',
@@ -49,6 +51,7 @@ class RegistrationType extends AbstractType
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'nom.prenom@mail.fr',
                     'max-lenght' => '50'
                 ],
                 'label' => 'Adresse email',
@@ -64,6 +67,7 @@ class RegistrationType extends AbstractType
             ->add('telephone', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => '06 12 34 56 78',
                     'max-lenght' => '20'
                 ],
                 'label' => 'Portable',
@@ -79,7 +83,8 @@ class RegistrationType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options' => [
                     'attr' => [
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'placeholder' => 'Mot de passe',
                     ],
                     'label' => 'Mot de passe',
                     'label_attr' => [
@@ -88,7 +93,8 @@ class RegistrationType extends AbstractType
                 ],
                 'second_options' => [
                     'attr' => [
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'placeholder' => '********',
                     ],
                     'label' => 'Confirmation du mot de passe',
                     'label_attr' => [
@@ -96,6 +102,51 @@ class RegistrationType extends AbstractType
                     ]
                 ],
                 'invalid_message' => 'Les mots de passe ne correspondent pas '
+            ])
+            ->add('adresse', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Adresse',
+                    'max-lenght' => '50'
+                ],
+                'label' => 'Adresse',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(['max' => 50])
+                ]
+            ])
+            ->add('cp', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Code postal',
+                    'max-lenght' => '20'
+                ],
+                'label' => 'Code postal',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(['max' => 20])
+                ]
+            ])
+            ->add('ville', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Ville',
+                    'max-lenght' => '50'
+                ],
+                'label' => 'Ville',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(['max' => 50])
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
