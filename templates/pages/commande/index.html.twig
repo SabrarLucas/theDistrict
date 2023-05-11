@@ -9,8 +9,8 @@
             <thead>
                 <tr class="table-dark">
                     <th scope="col">Date de la commande</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Etat de la commande</th>
+                    <th class="d-none d-lg-table-cell" scope="col">Total</th>
+                    <th class="d-none d-lg-table-cell" scope="col">Etat de la commande</th>
                     <th scope="col">Détail</th>
                 </tr>
             </thead>
@@ -18,8 +18,8 @@
             {% for commande in utilisateur.commandes %}
                 <tr class="table-light">
                     <th scope="row">{{ commande.commandedAt | date('d/m/Y') }}</th>
-                    <td>{{ commande.total }} €</td>
-                    <td>
+                    <td class="d-none d-lg-table-cell">{{ commande.total }} €</td>
+                    <td class="d-none d-lg-table-cell">
                         {% if commande.etat == 0 %}
                             Enregistée/payée
                         {% endif %}

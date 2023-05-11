@@ -10,7 +10,7 @@
                 <thead>
                     <tr class="table-dark">
                         <th scope="col">Plat</th>
-                        <th scope="col">Prix</th>
+                        <th class="d-none d-lg-table-cell" scope="col">Prix</th>
                         <th scope="col">Quantité</th>
                         <th scope="col">Total</th>
                         <th scope="col">Actions</th>
@@ -22,7 +22,7 @@
                     {% set total = total + (element.quantite * element.plat.prix) %}
                         <tr class="table-light">
                             <td>{{ element.plat.libelle }}</td>
-                            <td class="text-center">{{ element.plat.prix }} €</td>
+                            <td class="text-center d-none d-lg-table-cell">{{ element.plat.prix }} €</td>
                             <td class="text-center">{{ element.quantite }}</td>
                             <td class="text-start">{{ element.quantite * element.plat.prix }} €</td>
                             <td>
@@ -43,7 +43,7 @@
                         </tr>
                     {% endfor %}
                 </tbody>
-                <tfoot class="d-none d-sm-block">
+                <tfoot class="d-none d-lg-table-cell">
                     <tr class="table-light">
                         <td colspan="2">Total</td>
                         <td class="text-end">{{ total }} €</td>
@@ -55,7 +55,7 @@
                     </tr>
                 </tfoot>
             </table>
-            <div class="d-block d-sm-none d-flex justify-content-center">
+            <div class="d-block d-lg-none d-flex justify-content-center">
                 <td><a href="{{ path('panier.payer') }}" class="btn btn-success">Payer {{ total }} €</a>
                     <a href="{{ path('panier.deleteAll') }}" class="btn btn-danger">
                         <i class="uil uil-times-square"></i>
