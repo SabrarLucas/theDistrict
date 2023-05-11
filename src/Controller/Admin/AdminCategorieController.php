@@ -83,7 +83,7 @@ class AdminCategorieController extends AbstractController
 
 
             $this->addFlash(
-                'success',
+                'warning',
                 'Le categorie à bien été modifié.'
             );
 
@@ -105,7 +105,7 @@ class AdminCategorieController extends AbstractController
         $manager->flush();
 
         $this->addFlash(
-            'success',
+            'danger',
             'La categorie a bien été supprimé'
         );
         

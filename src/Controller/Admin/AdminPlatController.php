@@ -84,8 +84,8 @@ class AdminPlatController extends AbstractController
             $manager->flush();
 
             $this->addFlash(
-                'success',
-                'Le plat à bien été ajouté.'
+                'warning',
+                'Le plat à bien été modifié.'
             );
 
             return $this->redirectToRoute('admin_plat_index');
@@ -106,7 +106,7 @@ class AdminPlatController extends AbstractController
         $manager->flush();
 
         $this->addFlash(
-            'success',
+            'danger',
             'Le plat a bien été supprimé'
         );
         

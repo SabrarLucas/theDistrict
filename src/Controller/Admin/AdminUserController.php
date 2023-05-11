@@ -44,7 +44,7 @@ class AdminUserController extends AbstractController
             $manager->flush();
 
             $this->addFlash(
-                'success',
+                'warning',
                 'L\'utilisateur à bien été modifié.'
             );
 
