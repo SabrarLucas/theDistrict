@@ -3,8 +3,13 @@
 {% block title %}Administration categories{% endblock %}
 
 {% block body %}
-<div class="container mt-4 mb-5">
-    <h1 class="mt-4">Modifié un categorie</h1>
-    {% include "admin/categories/_form.html.twig" with {'button_label': 'Modifier'} %}
-</div>
+    <div class="container-fluid mt-4 mb-5">
+        <div class="row">
+            {% include "partials/_adminnav.html.twig" %}
+            <main class="col-9">
+                <h1 class="mt-4">Modifié un categorie</h1>
+                {% include "admin/categories/_form.html.twig" with {'button_label': 'Modifier'} %}
+            </main>
+        </div>
+    </div>
 {% endblock %}

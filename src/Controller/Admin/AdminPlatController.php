@@ -92,7 +92,8 @@ class AdminPlatController extends AbstractController
         }
 
         return $this->render('admin/plats/edit.html.twig', [
-            'platForm' => $platForm->createView()
+            'platForm' => $platForm->createView(),
+            'plat' => $plat
         ]);
     }
 

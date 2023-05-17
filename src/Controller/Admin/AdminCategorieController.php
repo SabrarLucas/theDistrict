@@ -91,7 +91,8 @@ class AdminCategorieController extends AbstractController
         }
 
         return $this->render('admin/categories/edit.html.twig', [
-            'categorieForm' => $categorieForm->createView()
+            'categorieForm' => $categorieForm->createView(),
+            'categorie' => $categorie
         ]);
     }
 

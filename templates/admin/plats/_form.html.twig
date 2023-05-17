@@ -3,6 +3,12 @@
     {{ form_row(platForm.description) }}
     {{ form_row(platForm.categorie) }}
     {{ form_row(platForm.prix) }}
+
+    {% if app.request.attributes.get('_route') == 'admin_plat_edit' %}
+        <h2>Images</h2>
+        <img src="{{ asset('assets/uploads/plat/mini/300x300-') ~ plat.image }}" alt="{{ plat.image }}">
+    {% endif %}
+
     {{ form_row(platForm.image) }}
     {{ form_row(platForm.active) }}
     <button type="submit" class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>

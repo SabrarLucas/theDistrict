@@ -1,5 +1,11 @@
 {{ form_start(categorieForm) }}
     {{ form_row(categorieForm.libelle) }}
+
+    {% if app.request.attributes.get('_route') == 'admin_categorie_edit' %}
+        <h2>Images</h2>
+        <img src="{{ asset('assets/uploads/categorie/mini/300x300-') ~ categorie.image }}" alt="{{ categorie.image }}">
+    {% endif %}
+
     {{ form_row(categorieForm.image) }}
     {{ form_row(categorieForm.active) }}
     <button type="submit" class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
