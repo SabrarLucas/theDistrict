@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Commande;
 use App\Entity\Utilisateur;
 use App\Repository\DetailRepository;
 use App\Repository\CommandeRepository;

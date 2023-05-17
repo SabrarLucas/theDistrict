@@ -39,6 +39,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $telephone = null;
 
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Commande::class)]
+    #[ORM\OrderBy(["commandedAt" => "DESC"])]
     private Collection $commandes;
 
     #[ORM\Column(length: 50)]
