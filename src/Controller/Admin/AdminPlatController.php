@@ -70,7 +70,7 @@ class AdminPlatController extends AbstractController
         $platForm->handleRequest($request);
 
         if($platForm->isSubmitted() && $platForm->isValid()) {
-
+            
             $image = $platForm->get('image')->getData();
 
             $plat = $platForm->getData();
