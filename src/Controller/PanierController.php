@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Detail;
+use Stripe\Stripe;
 use App\Entity\Plat;
+use App\Entity\Detail;
 use App\Entity\Commande;
+use Stripe\Checkout\Session;
 use App\Repository\PlatRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +18,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PanierController extends AbstractController
 {
+    private EntityManagerInterface $manager;
+
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     #[Route('/panier', name: 'panier')]
     public function index(SessionInterface $session, PlatRepository $platRepository): Response
     {
@@ -95,10 +105,12 @@ class PanierController extends AbstractController
     }
 
     #[Route('/panier/payer', 'panier.payer')]
-    public function payer(Request $request, SessionInterface $session, PlatRepository $platRepository, EntityManagerInterface $manager): Response
+    public function payer(Request $request, SessionInterface $session, PlatRepository $platRepository, EntityManagerInterface $manager)
     {
         $commande = new Commande();
         $detail = new Detail();
+
+        $productStripe = [];
 
         $panier = $session->get("panier", []);
 
@@ -126,6 +138,37 @@ class PanierController extends AbstractController
         $manager->persist($detail);
         $manager->flush();
 
-        return $this->redirectToRoute('home');
+        $order = $this->manager->getRepository(Commande::class)->findOneBy(['id' => $commande]);
+
+        if (!$order) {
+            return $this->redirectToRoute('panier');
+        }
+
+        foreach ($commande->getDetails()->getValues() as $platStripe) {
+            $productData = $this->manager->getRepository(Plat::class)->findOneBy(['id' => $platStripe->getPlat()]);
+            $productStripe[] = [
+                'price_date' => [
+                    'currency' => 'eur',
+                    'unit_amount' => $productData->getPrix(),
+                    'product_data' => [
+                        'name' => $platStripe->getPlat()
+                    ]
+                ],
+                'quantity' => $platStripe->getQuantite()
+            ];
+        }
+
+        dd($productStripe);
+
+        Stripe::setApiKey('sk_test_51NAYQBE2FsOcar9UDgs2LSslqRqh1pnG5f38CSoNYFku6M0WHXOvCoAWcZFf2ek6jNvrGzWI7QmMyGwRBuudPLY400mIVk8UBP');
+
+        $checkout_session = Session::create([
+            'line_items' => [[
+                
+            ]],
+            'mode' => 'payment',
+            'success_url' => $YOUR_DOMAIN . '/success.html',
+            'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+        ]);
     }
 }
