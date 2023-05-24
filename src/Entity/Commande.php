@@ -30,6 +30,7 @@ class Commande
     private ?Utilisateur $utilisateur = null;
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Detail::class)]
+    #[ORM\JoinColumn(referencedColumnName:"id", onDelete: "CASCADE")]
     private Collection $details;
 
     public function __construct()

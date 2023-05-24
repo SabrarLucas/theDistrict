@@ -18,10 +18,12 @@ class Detail
 
     #[ORM\ManyToOne(inversedBy: 'details')]
     #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(referencedColumnName:"id", onDelete: "CASCADE")]
     private ?Commande $commande = null;
 
     #[ORM\ManyToOne(inversedBy: 'details')]
     #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(referencedColumnName:"id", onDelete: "CASCADE")]
     private ?Plat $plat = null;
 
     public function getId(): ?int
