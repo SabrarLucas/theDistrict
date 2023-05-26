@@ -105,7 +105,10 @@ class PanierController extends AbstractController
     }
 
     #[Route('/panier/payer', 'panier.payer')]
-    public function payer(Request $request, SessionInterface $session, PlatRepository $platRepository, EntityManagerInterface $manager)
+    public function payer(Request $request, 
+    SessionInterface $session, 
+    PlatRepository $platRepository, 
+    EntityManagerInterface $manager)
     {
         $commande = new Commande();
         $detail = new Detail();
