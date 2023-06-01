@@ -18,7 +18,7 @@ class AdminPlatController extends AbstractController
     #[Route('/', 'index')]
     public function index(PlatRepository $platRepository) : Response
     {
-        return $this->render('admin/plats/index.html.twig', [
+        return $this->render('admin/plats/plat.html.twig', [
             'plats' => $platRepository->findAll()
         ]);
     }

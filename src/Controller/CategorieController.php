@@ -13,7 +13,7 @@ class CategorieController extends AbstractController
     #[Route('/categorie', name: 'categorie')]
     public function index(CategorieRepository $repository): Response
     {
-        return $this->render('pages/categorie/index.html.twig', [
+        return $this->render('pages/categorie/categorie.html.twig', [
             'categories' => $repository->findAll()
         ]);
     }

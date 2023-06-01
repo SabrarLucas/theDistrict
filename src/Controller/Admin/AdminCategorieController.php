@@ -18,7 +18,7 @@ class AdminCategorieController extends AbstractController
     #[Route('/', 'index')]
     public function index(CategorieRepository $categorieRepository) : Response
     {
-        return $this->render('admin/categories/index.html.twig', [
+        return $this->render('admin/categories/categorie.html.twig', [
             'categories' => $categorieRepository->findAll()
         ]);
     }

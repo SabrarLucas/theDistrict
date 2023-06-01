@@ -13,7 +13,7 @@ class PlatController extends AbstractController
     #[Route('/plat', name: 'plat')]
     public function index(PlatRepository $platRepository): Response
     {
-        return $this->render('pages/plat/index.html.twig', [
+        return $this->render('pages/plat/plat.html.twig', [
             'plats' => $platRepository->findAll()
         ]);
     }

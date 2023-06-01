@@ -15,7 +15,7 @@ class CommandeController extends AbstractController
     #[Route('/commande/{id}', name: 'commande')]
     public function index(Utilisateur $utilisateur): Response
     {
-        return $this->render('pages/commande/index.html.twig', [
+        return $this->render('pages/commande/commande.html.twig', [
             'utilisateur' => $utilisateur
         ]);
     }
