@@ -27,12 +27,12 @@ SET time_zone = "+00:00";
 -- Structure de la table `categorie`
 --
 
--- CREATE TABLE `categorie` (
---   `id` int(11) NOT NULL,
---   `libelle` varchar(50) NOT NULL,
---   `image` varchar(50) NOT NULL,
---   `active` tinyint(1) NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `categorie` (
+  `id` int(11) NOT NULL,
+  `libelle` varchar(50) NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `categorie`
@@ -52,13 +52,13 @@ INSERT INTO `categorie` (`id`, `libelle`, `image`, `active`) VALUES
 -- Structure de la table `commande`
 --
 
--- CREATE TABLE `commande` (
---   `id` int(11) NOT NULL,
---   `utilisateur_id` int(11) NOT NULL,
---   `commanded_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
---   `total` decimal(6,2) NOT NULL,
---   `etat` int(11) NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `commande` (
+  `id` int(11) NOT NULL,
+  `utilisateur_id` int(11) NOT NULL,
+  `commanded_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  `total` decimal(6,2) NOT NULL,
+  `etat` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `commande`
@@ -75,15 +75,15 @@ INSERT INTO `commande` (`id`, `utilisateur_id`, `commanded_at`, `total`, `etat`)
 -- Structure de la table `plat`
 --
 
--- CREATE TABLE `plat` (
---   `id` int(11) NOT NULL,
---   `categorie_id` int(11) NOT NULL,
---   `libelle` varchar(50) NOT NULL,
---   `description` longtext NOT NULL,
---   `prix` decimal(6,2) NOT NULL,
---   `image` varchar(50) NOT NULL,
---   `active` tinyint(1) NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `plat` (
+  `id` int(11) NOT NULL,
+  `categorie_id` int(11) NOT NULL,
+  `libelle` varchar(50) NOT NULL,
+  `description` longtext NOT NULL,
+  `prix` decimal(6,2) NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `plat`
@@ -101,18 +101,18 @@ INSERT INTO `plat` (`id`, `categorie_id`, `libelle`, `description`, `prix`, `ima
 -- Structure de la table `utilisateur`
 --
 
--- CREATE TABLE `utilisateur` (
---   `id` int(11) NOT NULL,
---   `email` varchar(180) NOT NULL,
---   `roles` longtext NOT NULL COMMENT '(DC2Type:json)',
---   `password` varchar(255) NOT NULL,
---   `nom` varchar(50) NOT NULL,
---   `prenom` varchar(50) NOT NULL,
---   `telephone` varchar(20) NOT NULL,
---   `adresse` varchar(50) NOT NULL,
---   `cp` varchar(20) NOT NULL,
---   `ville` varchar(50) NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `utilisateur` (
+  `id` int(11) NOT NULL,
+  `email` varchar(180) NOT NULL,
+  `roles` longtext NOT NULL COMMENT '(DC2Type:json)',
+  `password` varchar(255) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `telephone` varchar(20) NOT NULL,
+  `adresse` varchar(50) NOT NULL,
+  `cp` varchar(20) NOT NULL,
+  `ville` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -129,74 +129,74 @@ INSERT INTO `utilisateur` (`id`, `email`, `roles`, `password`, `nom`, `prenom`, 
 --
 -- Index pour la table `categorie`
 --
--- ALTER TABLE `categorie`
---   ADD PRIMARY KEY (`id`);
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `commande`
 --
--- ALTER TABLE `commande`
---   ADD PRIMARY KEY (`id`),
---   ADD KEY `IDX_6EEAA67DFB88E14F` (`utilisateur_id`);
+ALTER TABLE `commande`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_6EEAA67DFB88E14F` (`utilisateur_id`);
 
--- --
--- -- Index pour la table `plat`
--- --
--- ALTER TABLE `plat`
---   ADD PRIMARY KEY (`id`),
---   ADD KEY `IDX_2038A207BCF5E72D` (`categorie_id`);
+--
+-- Index pour la table `plat`
+--
+ALTER TABLE `plat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_2038A207BCF5E72D` (`categorie_id`);
 
--- --
--- -- Index pour la table `utilisateur`
--- --
--- ALTER TABLE `utilisateur`
---   ADD PRIMARY KEY (`id`),
---   ADD UNIQUE KEY `UNIQ_1D1C63B3E7927C74` (`email`);
+--
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_1D1C63B3E7927C74` (`email`);
 
--- --
--- -- AUTO_INCREMENT pour les tables déchargées
--- --
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
 
--- --
--- -- AUTO_INCREMENT pour la table `categorie`
--- --
--- ALTER TABLE `categorie`
---   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
--- --
--- -- AUTO_INCREMENT pour la table `commande`
--- --
--- ALTER TABLE `commande`
---   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT pour la table `commande`
+--
+ALTER TABLE `commande`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
--- --
--- -- AUTO_INCREMENT pour la table `plat`
--- --
--- ALTER TABLE `plat`
---   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT pour la table `plat`
+--
+ALTER TABLE `plat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
--- --
--- -- AUTO_INCREMENT pour la table `utilisateur`
--- --
--- ALTER TABLE `utilisateur`
---   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
--- --
--- -- Contraintes pour les tables déchargées
--- --
+--
+-- Contraintes pour les tables déchargées
+--
 
--- --
--- -- Contraintes pour la table `commande`
--- --
--- ALTER TABLE `commande`
---   ADD CONSTRAINT `FK_6EEAA67DFB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`);
+--
+-- Contraintes pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD CONSTRAINT `FK_6EEAA67DFB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`);
 
--- --
--- -- Contraintes pour la table `plat`
--- --
--- ALTER TABLE `plat`
---   ADD CONSTRAINT `FK_2038A207BCF5E72D` FOREIGN KEY (`categorie_id`) REFERENCES `categorie` (`id`);
--- COMMIT;
+--
+-- Contraintes pour la table `plat`
+--
+ALTER TABLE `plat`
+  ADD CONSTRAINT `FK_2038A207BCF5E72D` FOREIGN KEY (`categorie_id`) REFERENCES `categorie` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
